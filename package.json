@@ -2,6 +2,7 @@
   "name": "svg-quickly",
   "version": "1.0.0",
   "description": "Node.js application that generates an SVG file based on user input.",
+  "type": "module",
   "main": "index.js",
   "directories": {
     "example": "examples",
