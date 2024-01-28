@@ -1,7 +1,11 @@
 import { input , select } from '@inquirer/prompts';
 
-let text; 
-let shape;
+const logo = {
+    text: '',
+    shape: '',
+    textColor: '',
+    shapeColor: ''
+}
 
 async function getLogoText() {
     const response = await input({ message: "Input what letters your logo will display: " });
@@ -25,14 +29,16 @@ async function getShape() {
                 {name: 'Triangle', value: 'triangle'}
             ]
         }),
-    
     }
+
+    return shape;
 }
 
 
 async function init() {
-    text = await getLogoText();
-    shape = await getShape();
+    logo.text = await getLogoText();
+    logo.shape = await getShape();
+    console.log(logo);
  }
 
  init();
