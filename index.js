@@ -41,7 +41,7 @@ async function getTextColor() {
 
     if (response === 'keyword') {
         const keywordResponse = await input({ message: 'Enter the color keyword: ' });
-        const keyword = keywordResponse.value;
+        const keyword = keywordResponse.valueOf();
         if (await validateColorKeyword(keyword)) {
             return keyword;
         } else {
@@ -50,7 +50,7 @@ async function getTextColor() {
         }
     } else if (response === 'hex') {
         const hexResponse = await input({ message: 'Enter the hexadecimal of the color: ' });
-        const hex = hexResponse.value;
+        const hex = hexResponse.valueOf();
         if (await validateColorHex(`#${hex}`)) {
             return `#${hex}`;
         } else {
@@ -86,7 +86,7 @@ async function getShapeColor() {
 
     if (response === 'keyword') {
         const keywordResponse = await input({ message: 'Enter the color keyword: ' });
-        const keyword = keywordResponse.value;
+        const keyword = keywordResponse.valueOf();
         if (await validateColorKeyword(keyword)) {
             return keyword;
         } else {
@@ -95,7 +95,7 @@ async function getShapeColor() {
         }
     } else if (response === 'hex') {
         const hexResponse = await input({ message: 'Enter the hexadecimal of the color: ' });
-        const hex = hexResponse.value;
+        const hex = hexResponse.valueOf();
         if (await validateColorHex(`#${hex}`)) {
             return `#${hex}`;
         } else {
