@@ -1,10 +1,13 @@
 import { input , select } from '@inquirer/prompts';
+import { generateLogo } from './generateLogo.js';
+import fs from 'fs/promises';
+
 
 const logo = {
-    text: '',
     shape: '',
-    textColor: '',
-    shapeColor: ''
+    text: '',
+    textFill: '',
+    shapeFill: '',
 }
 
 const colorKeywordRegex = /^[a-zA-Z]+$/;
@@ -72,7 +75,7 @@ async function getShape() {
         }),
     }
 
-    return shape;
+    return shape.choice;
 }
 
 async function getShapeColor() {
@@ -105,12 +108,30 @@ async function getShapeColor() {
     }
 }
 
+
+
+function saveSVG(svgMarkup, filename) {
+    // Define the path relative to the current working directory
+    const path = `./${filename}.svg`;
+
+    // Write the SVG markup to a file
+    fs.writeFile(path, svgMarkup, (err) => {
+        if (err) {
+            console.error('Error saving SVG:', err);
+        } else {
+            console.log(`SVG saved successfully to ${path}`);
+        }
+    });
+}
+
 async function init() {
-    logo.text = await getLogoText();
-    logo.textColor = await getTextColor();
     logo.shape = await getShape();
-    logo.shapeColor = await getShapeColor();
-    console.log(logo);
+    logo.shapeFill = await getShapeColor();
+    logo.text = await getLogoText();
+    logo.textFill = await getTextColor();
+    logo.filename = await input({ message: 'What would you like to name this file?: '});
+
+    return saveSVG(generateLogo(logo), logo.filename);
  }
 
  init();
